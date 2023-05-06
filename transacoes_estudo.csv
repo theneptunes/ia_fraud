@@ -1,0 +1,29 @@
+Nome completo,Localização,Valor de transação,Horário,Categoria de compra
+#valores entre 0 e 2000
+#70% é Comida
+#70% é em Campinas-SP
+
+Fernando Souza,Campinas-SP,253.54,12:34:56,Comida,0
+Fernando Souza,Campinas-SP,1754.78,13:45:23,Comida,0
+Fernando Souza,Campinas-SP,1275.43,14:56:42,Comida,0
+Fernando Souza,São Paulo-SP,103.21,16:07:59,Eletrônicos,0
+Fernando Souza,Campinas-SP,345.98,17:19:12,Comida,0
+Fernando Souza,Campinas-SP,1698.45,18:30:22,Comida,0
+Fernando Souza,Campinas-SP,985.32,19:41:31,Comida,0
+Fernando Souza,Recife-PE,521.43,20:52:44,Comida,0
+Fernando Souza,Campinas-SP,62.14,22:03:55,Eletrônicos,0
+Fernando Souza,Campinas-SP,1986.23,23:15:09,Comida,0
+Fernando Souza,Campinas-SP,28.57,00:26:19,Comida,0
+Fernando Souza,Porto Alegre-RS,1234.56,01:37:29,Eletrônicos,0
+Fernando Souza,Campinas-SP,189.65,02:48:39,Comida,0
+Fernando Souza,Campinas-SP,765.21,03:59:50,Comida,0
+
+#valores entre 2000 e 5000
+#70% é Eletrônicos
+#70% é em Recife-PE
+
+Fernando Souza,Recife-PE,4658.39,15:23:45,Eletronicos,1
+Fernando Souza,Recife-PE,3199.24,10:47:52,Eletronicos,1
+Fernando Souza,Recife-PE,2857.66,18:31:18,Eletronicos,1
+Fernando Souza,Recife-PE,2501.98,14:02:30,Eletronicos,1
+Fernando Souza,Recife-PE,4225.62,22:49:10,Comida,1

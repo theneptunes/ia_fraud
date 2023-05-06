@@ -1,0 +1,24 @@
+Existem muitos modelos classificadores que podem ser usados para detectar transações financeiras fraudulentas. Alguns dos mais comuns são:
+
+Regressão Logística: É um modelo linear que é útil para classificar dados binários. Ele modela a probabilidade de um evento ocorrer, com base em várias variáveis independentes.
+
+Árvore de decisão: É um modelo de classificação que divide um conjunto de dados em ramos e nós de decisão para prever uma classe ou valor de destino.
+
+Random Forest: É um modelo de aprendizado em conjunto que usa várias árvores de decisão para classificar os dados.
+
+Redes Neurais: São modelos de aprendizado profundo que simulam o funcionamento do cérebro humano para encontrar padrões nos dados.
+
+
+
+#ERRO: https://stackoverflow.com/questions/62658215/convergencewarning-lbfgs-failed-to-converge-status-1-stop-total-no-of-iter
+Based on your comment below, some tips to try (out of many) that might help the algorithm to converge are:
+
+Increase the number of iterations: As in this answer;
+Try a different optimizer: Look here; https://stackoverflow.com/questions/38640109/logistic-regression-python-solvers-definitions/52388406#52388406
+Scale your data: Look here; https://scikit-learn.org/stable/modules/preprocessing.html
+Add engineered features: Look here; https://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/
+Data pre-processing: Look here - use case and here;
+    - https://datascience.stackexchange.com/questions/80421/very-low-cross-val-score-for-regression-with-big-corr-between-feature-and-res/80422#80422
+    - https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
+Add more data: Look here.
+    - https://www.quora.com/How-do-you-determine-sample-size-for-machine-learning-classification/answer/Yahya-Almardeny

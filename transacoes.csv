@@ -1,0 +1,20 @@
+Nome_completo,Localizacao,Valor_de_transacao,Horario,Categoria_de_compra,Fraude
+Fernando Souza,Campinas-SP,253.54,Dia,Comida,0
+Fernando Souza,Campinas-SP,1754.78,Dia,Comida,0
+Fernando Souza,Campinas-SP,1275.43,Dia,Comida,0
+Fernando Souza,São Paulo-SP,103.21,Dia,Eletrônicos,0
+Fernando Souza,Campinas-SP,345.98,Tarde,Comida,0
+Fernando Souza,Campinas-SP,1698.45,Tarde,Comida,0
+Fernando Souza,Campinas-SP,985.32,Tarde,Comida,0
+Fernando Souza,Recife-PE,521.43,Tarde,Comida,0
+Fernando Souza,Campinas-SP,62.14,Tarde,Eletrônicos,0
+Fernando Souza,Campinas-SP,1986,Noite,Comida,0
+Fernando Souza,Campinas-SP,28.57,Dia,Comida,0
+Fernando Souza,Porto Alegre-RS,1234.56,Tarde,Eletrônicos,0
+Fernando Souza,Campinas-SP,189.65,Noite,Comida,0
+Fernando Souza,Campinas-SP,765.21,Dia,Comida,0
+Fernando Souza,Recife-PE,4658.39,Noite,Eletrônicos,1
+Fernando Souza,Recife-PE,3199.24,Noite,Eletrônicos,1
+Fernando Souza,Recife-PE,2857.66,Dia,Eletrônicos,1
+Fernando Souza,Recife-PE,2501.98,Noite,Eletrônicos,1
+Fernando Souza,Recife-PE,4225.62,Tarde,Comida,1
