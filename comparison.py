@@ -68,17 +68,17 @@ X = pd.get_dummies(df)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 0, stratify=y)
 
 print("Logictic regression....")
-#model_lr = LogisticRegression(solver='lbfgs', max_iter=400)
-#model_lr.fit(X_train, y_train)
+model_lr = LogisticRegression(solver='lbfgs', max_iter=400)
+model_lr.fit(X_train, y_train)
 
-#y_pred_lr=model_lr.predict(X_test)
+y_pred_lr=model_lr.predict(X_test)
 print("Logictic regression done!")
 
 print("Random forest....")
-#model_rf = RandomForestClassifier(n_estimators = 100)
-#model_rf.fit(X_train, y_train)
+model_rf = RandomForestClassifier(n_estimators = 100)
+model_rf.fit(X_train, y_train)
 
-#y_pred_rf=model_rf.predict(X_test)
+y_pred_rf=model_rf.predict(X_test)
 print("Random forest done!")
 
 print("Isolation forest....")
@@ -91,17 +91,14 @@ y_pred_if = ['Yes' if i==-1 else 'No' for i in y_pred_if]
 print("Isolation forest done!")
 
 # Avaliação
-#print('LGBM Report')
-#print(classification_report(y_test, y_pred_lgbm))
+print('LGBM Report')
+print(classification_report(y_test, y_pred_lgbm))
 
-#print('Logistic regression Report')
-#print(classification_report(y_test, y_pred_lr))
+print('Logistic regression Report')
+print(classification_report(y_test, y_pred_lr))
 
-#print('Random Tree Report')
-#print(classification_report(y_test, y_pred_rf))
+print('Random Tree Report')
+print(classification_report(y_test, y_pred_rf))
 
 print('Isolation Tree Report')
-print(y_test)
-print(y_pred_if)
-#y_test = y_test.astype(y_pred_if.dtype)
 print(classification_report(y_test, y_pred_if))
