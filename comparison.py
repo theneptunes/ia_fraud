@@ -93,12 +93,41 @@ print("Isolation forest done!")
 # Avaliação
 print('LGBM Report')
 print(classification_report(y_test, y_pred_lgbm))
+importances = model_lgbm.feature_importances_
+importances_greater_than_zero = []
+for i in importances:
+    if i > 0:
+        importances_greater_than_zero.append(i)
+feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(X.columns, importances_greater_than_zero)]
+feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+print()
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+
 
 print('Logistic regression Report')
 print(classification_report(y_test, y_pred_lr))
+importances = model_lgbm.feature_importances_
+importances_greater_than_zero = []
+for i in importances:
+    if i > 0:
+        importances_greater_than_zero.append(i)
+feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(X.columns, importances_greater_than_zero)]
+feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+print()
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
-print('Random Tree Report')
+print('Random Forest Report')
 print(classification_report(y_test, y_pred_rf))
+importances = model_lgbm.feature_importances_
+importances_greater_than_zero = []
+for i in importances:
+    if i > 0:
+        importances_greater_than_zero.append(i)
+feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(X.columns, importances_greater_than_zero)]
+feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+print()
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
 print('Isolation Tree Report')
 print(classification_report(y_test, y_pred_if))
+print("For this model, there isn't an impemented logic for calc feature importance")
