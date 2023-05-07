@@ -5,11 +5,11 @@ from datetime import datetime, date, timedelta
 import pymongo
 
 # String de conexão do MongoDB
-mongo_url = 'mongodb+srv://<>:<>@cluster0.gsy7oqf.mongodb.net/?retryWrites=true&w=majority'
+mongo_url = 'mongodb+srv://leo:123@cluster0.nknwieb.mongodb.net/?retryWrites=true&w=majority'
 # Nome da coleção onde serão inseridos os documentos
 collection_name = 'transactions'
 # Nome do arquivo JSON que será carregado
-json_file = 'transacoes.json'
+json_file = 'transacoesLIGHT.json'
 # Conexão com o MongoDB
 client = pymongo.MongoClient(mongo_url)
 # Banco de dados onde serão inseridos os documentos
