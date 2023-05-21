@@ -5,6 +5,9 @@ import lightgbm as lgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
@@ -61,6 +64,12 @@ df['MCC'] = df['MCC'].fillna(df['MCC'].mode()[0])
 df['Errors?'] = df['Errors?'].fillna(df['Errors?'].mode()[0])
 df['Is Fraud?'] = df['Is Fraud?'].fillna(df['Is Fraud?'].mode()[0])
 
+df = df.drop(['User'],axis=1)
+df = df.drop(['Card'],axis=1)
+df = df.drop(['Merchant State'],axis=1)
+df = df.drop(['Zip'],axis=1)
+df = df.drop(['MCC'],axis=1)
+df = df.drop(['Errors?'],axis=1)
 print("Check for Nan")
 for col in df.columns:
     if df[col].isnull().values.any():
@@ -72,7 +81,9 @@ y = df['Is Fraud?']
 
 X = df.drop(['Is Fraud?'],axis=1)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = 42, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = 42, stratify=y)#sk metrics
+# pipeline
+# # validação cruzada)
 
 print('LGBM....')
 model_lgbm = lgb.LGBMClassifier()
@@ -88,12 +99,12 @@ model_lr.fit(X_train, y_train)
 y_pred_lr=model_lr.predict(X_test)
 print("Logictic regression done!")
 
-#print("Random forest....")
-#model_rf = RandomForestClassifier(n_estimators = 100)
-#model_rf.fit(X_train, y_train)
+print("Random forest....")
+model_rf = RandomForestClassifier(n_estimators = 100)
+model_rf.fit(X_train, y_train)
 
-#y_pred_rf=model_rf.predict(X_test)
-#print("Random forest done!")
+y_pred_rf=model_rf.predict(X_test)
+print("Random forest done!")
 
 #print("Isolation forest....")
 #model_if = IsolationForest(contamination='auto', random_state=42)
@@ -106,24 +117,13 @@ print("Logictic regression done!")
 
 # Avaliação
 print('LGBM Report')
-print(classification_report(y_test, y_pred_lgbm))
-importances = model_lgbm.feature_importances_
-importances_greater_than_zero = []
-for i in importances:
-    if i > 0:
-        importances_greater_than_zero.append(i)
-feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(X.columns, importances_greater_than_zero)]
-feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
-print()
-[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+print(confusion_matrix(y_test, y_pred_lgbm))
+print("Acurácia: ", accuracy_score(y_test,y_pred_lgbm))
+print("Precisão: ", precision_score(y_test,y_pred_lgbm))
+#acurácia: quero que sempre que eu falar que é fraude, eu esteja certa
+#precisão: quero que sempre que for fraude, eu fale que é fraude
 
-
-print('Logistic regression Report')
-print(classification_report(y_test, y_pred_lr))
-
-#print('Random Forest Report')
-#print(classification_report(y_test, y_pred_rf))
-#importances = model_rf.feature_importances_
+#importances = model_lgbm.feature_importances_
 #importances_greater_than_zero = []
 #for i in importances:
 #    if i > 0:
@@ -133,6 +133,33 @@ print(classification_report(y_test, y_pred_lr))
 #print()
 #[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
+
+print('Logistic regression Report')
+print(confusion_matrix(y_test, y_pred_lr))
+print("Acurácia: ", accuracy_score(y_test,y_pred_lr))
+print("Precisão: ", precision_score(y_test,y_pred_lr))
+
+print('Random Forest Report')
+print(confusion_matrix(y_test, y_pred_rf))
+print("Acurácia: ", accuracy_score(y_test,y_pred_rf))
+print("Precisão: ", precision_score(y_test,y_pred_rf))
+importances = model_rf.feature_importances_
+importances_greater_than_zero = []
+for i in importances:
+    if i > 0:
+        importances_greater_than_zero.append(i)
+feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(X.columns, importances_greater_than_zero)]
+feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+print()
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+
 #print('Isolation Tree Report')
 #print(classification_report(y_test, y_pred_if))
 #print("For this model, there isn't an impemented logic for calc feature importance")
+
+# Com a matriz de confusão exibida, podemos afirmar que:
+# 1- O modelo LGBM é melhor pra classificar transações que NÃO são fraudes
+# 2- O modelo LR é melhor para classificar transações que SÃO fraudes
+
+# Com isso em mente, vamos utilizar o modelo de LR, que classifica como fraude transações que 
+# não são fraude, mas que é melhor para identificar fraude.
