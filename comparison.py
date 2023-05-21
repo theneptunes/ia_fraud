@@ -153,11 +153,7 @@ feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse 
 print()
 [print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
-#print('Isolation Tree Report')
-#print(classification_report(y_test, y_pred_if))
-#print("For this model, there isn't an impemented logic for calc feature importance")
-
-# Com a matriz de confusão exibida, podemos afirmar que:
+# Com a matriz de confusão exibida (salva no arquivo confusion_matrix.png), podemos afirmar que:
 # 1- O modelo LGBM é melhor pra classificar transações que NÃO são fraudes
 # 2- O modelo LR é melhor para classificar transações que SÃO fraudes
 
