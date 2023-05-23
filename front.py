@@ -1,9 +1,5 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
+import datetime
 
 def search_data(year, month, day, hour, value, data_type, name, city):
     # Your search logic goes here
@@ -20,19 +16,16 @@ def main():
     # Create input fields
     st.title('Data Search')
 
-    time = st.number_input('Hora da Transação', min_value=0, max_value=23)
-
-    year = st.number_input('Year', min_value=1900, max_value=2100, value=2023)
-    month = st.number_input('Month', min_value=1, max_value=12, value=5)
-    day = st.number_input('Day', min_value=1, max_value=31, value=22)
-    value = st.number_input('Value', min_value=0.0, max_value=100.0, value=42.0)
-    data_type = st.selectbox('Type', ['Type A', 'Type B', 'Type C'])
-    name = st.text_input('Name')
-    city = st.text_input('City')
+    time = st.time_input('Hora da Transação', datetime.time(8, 45))
+    year = st.date_input('Data da Transação')
+    value = st.number_input('Valor da Transação', min_value=0.0, value=42.0)
+    data_type = st.selectbox('Tipo da Transação', ['Crédito', 'Débito', 'Boleto', 'TED', 'DOC', 'PIX', 'Cheque'])
+    name = st.text_input('Nome do Transador')
+    city = st.text_input('Cidade da Transação')
 
     # Search button
     if st.button('Search'):
-        result = search_data(year, month, day, time, value, data_type, name, city)
+        result = search_data(year, time, value, data_type, name, city)
         st.write(f'Search Result: {result}')
 
 if __name__ == '__main__':
