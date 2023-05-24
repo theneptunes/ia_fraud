@@ -1,4 +1,5 @@
 import lr
+import gnb
 import Transaction
 ## Year,Month,Day,Time,Amount,Use Chip,Merchant Name,Merchant City,Is Fraud?
      
@@ -22,6 +23,8 @@ t = Transaction.Transaction(
     1
 )
 predicted = lr([t.values])
+print(predicted)
+print(gnb([t.values]))
 if predicted[0] == 0:
     print("OK")
 else:

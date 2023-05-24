@@ -4,7 +4,7 @@ import calendar
 
 @st.cache_data()
 def load_data():
-    df = pd.read_csv("filtered.csv")
+    df = pd.read_csv("data/filtered.csv")
     # Removendo o símbolo "$" e convertendo a coluna "Amount" para float
     df['Amount'] = df['Amount'].str.replace('$', '').astype(float)
     return df

@@ -10,7 +10,7 @@ import Transaction
 import torch
 
 def transform():
-    dataset_name = "./filtered.csv"
+    dataset_name = "data/filtered.csv"
 
     df = pd.read_csv(dataset_name)
     df.info()
@@ -77,8 +77,10 @@ def train(df):
     model_lr = LogisticRegression(solver='lbfgs', max_iter=400)
     model_lr.fit(X_train, y_train)
 
-    y_pred_lr=model_lr.predict(X_test)
+    y_pred = model_lr.predict(X_test)
     print("Logictic regression done!")
+
+    evaluate(y_test, y_pred)
     return model_lr
 
 def evaluate(y_test, y_pred):
@@ -91,9 +93,10 @@ def evaluate(y_test, y_pred):
     print("Precisão: ", precision_score(y_test,y_pred))
 
 def get_model():
-    return torch.load('model.pt')
+    return torch.load('models/lr.pt')
+
 def save(model):
-    torch.save(model,'model.pt')
+    torch.save(model,'models/lr.pt')
 
 def predict_lr(t :Transaction.Transaction):
     #df = transform()
@@ -102,5 +105,9 @@ def predict_lr(t :Transaction.Transaction):
     #save(model)
     return model.predict(t)
 
-
-sys.modules[__name__] = predict_lr
+if __name__ == "__main__":
+    df = transform()
+    model = train(df)
+    save(model)
+else:
+    sys.modules[__name__] = predict_lr

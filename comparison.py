@@ -13,7 +13,7 @@ from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
 import datetime
 
-dataset_name = "./filtered.csv"
+dataset_name = "data/filtered.csv"
 
 df = pd.read_csv(dataset_name)
 df.info()

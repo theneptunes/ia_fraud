@@ -13,10 +13,23 @@ from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
 import datetime
 
-dataset_name = "./filtered.csv"
+def get_normalizer_dict(df_column):
+    values = dict()
+    count = 0
+    for i in df_column:
+        if values.get(i) is None:
+            values[i] = count
+            count += 1
+    return values
+
+dataset_name = "../data/filtered.csv"
 
 df = pd.read_csv(dataset_name)
 
-print(df['Use Chip'].unique())
+# print(df['Use Chip'].unique())
 
-print(df['Merchant City'].unique())
+# print(df['Merchant City'].unique())
+
+for c in ['Use Chip','Merchant City', 'Merchant State', 'Errors?', 'Is Fraud?']:
+    df[c] = df[c].replace(get_normalizer_dict(df[c]))
+    print(df[c])

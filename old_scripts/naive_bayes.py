@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Define onde está a base de dados em csv
-path = 'User0_credit_card_transactions.csv'
+path = '../data/User0_credit_card_transactions.csv'
 # Define a variável data como sendo o data frame importado do csv
 data = pd.read_csv(path)
 # Define target (a coluna que queremos prever)
