@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import IsolationForest
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 import datetime
 
 dataset_name = "data/filtered.csv"
