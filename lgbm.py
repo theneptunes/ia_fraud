@@ -8,7 +8,7 @@ import lightgbm as lgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-df = pd.read_csv("./User0_credit_card_transactions.csv")
+df = pd.read_csv("data/User0_credit_card_transactions.csv")
 
 df.head()
 
