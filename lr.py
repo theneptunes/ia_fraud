@@ -13,7 +13,6 @@ def transform():
     dataset_name = "data/filtered.csv"
 
     df = pd.read_csv(dataset_name)
-    df.info()
 
     my_date = datetime.datetime(2023,5,5)
     converted_timestamps = {}
@@ -33,7 +32,7 @@ def transform():
         amounts[i] = float(str(i).split('$')[1])
     df['Amount'] = df['Amount'].replace(amounts)
 
-    for c in ['Use Chip','Merchant City', 'Merchant State', 'Errors?', 'Is Fraud?']:
+    for c in ['Use Chip','Merchant City', 'Merchant State', 'Errors?']:
         values = {}
         count = 0
         for i in df[c]:
@@ -59,11 +58,25 @@ def transform():
     df['Merchant Name'] = df['Merchant Name'].fillna(df['Merchant Name'].mode()[0])
     df['Is Fraud?'] = df['Is Fraud?'].fillna(df['Is Fraud?'].mode()[0])
 
+    my_dict = {
+        'Swipe Transaction': [],
+        'Online Transaction': [],
+        'Chip Transaction': []
+    }
+
+    values = []
+    for i in df['Is Fraud?']:
+        if i == "No":
+            values.append(False)
+        else:
+            values.append(True)
+    df['Is Fraud?'] = values
     print("Check for Nan")
     for col in df.columns:
         if df[col].isnull().values.any():
             print(col)
     print("Check for Nan done!")
+    df.info()
     return df
 
 def train(df):
@@ -71,7 +84,7 @@ def train(df):
 
     X = df.drop(['Is Fraud?'],axis=1)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = 42, stratify=y)#sk metrics
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4000, stratify=y)#sk metrics
 
     print("Logictic regression....")
     model_lr = LogisticRegression(solver='lbfgs', max_iter=400)

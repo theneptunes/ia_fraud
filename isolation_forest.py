@@ -5,6 +5,7 @@ import lightgbm as lgb
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
+from sklearn.ensemble import IsolationForest
 import datetime
 import Transaction
 import torch
@@ -59,7 +60,6 @@ def transform():
     df['Merchant Name'] = df['Merchant Name'].fillna(df['Merchant Name'].mode()[0])
     df['Is Fraud?'] = df['Is Fraud?'].fillna(df['Is Fraud?'].mode()[0])
 
-
     values = []
     for i in df['Is Fraud?']:
         if i == "No":
@@ -82,12 +82,14 @@ def train(df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42, stratify=y)#sk metrics
 
-    print('LGBM....')
-    model = lgb.LGBMClassifier()
-    model.fit(X_train, y_train, feature_name='auto', categorical_feature = 'auto', verbose=50)
+    print("Isolation forest....")
+    model = IsolationForest(contamination='auto', random_state=42)
+    model.fit(X_train, y_train)
 
     y_pred=model.predict(X_test)
-    print("LGBM done!")
+    y_pred = [False if i==-1 else True for i in y_pred]
+
+    print("Isolation forest done!")
 
     evaluate(y_test, y_pred)
     return model
@@ -96,7 +98,7 @@ def evaluate(y_test, y_pred):
     # Avaliação
     #acurácia: quero que sempre que eu falar que é fraude, eu esteja certa
     #precisão: quero que sempre que for fraude, eu fale que é fraude
-    print('LGBM')
+    print('IF')
     print(confusion_matrix(y_test, y_pred))
     print("Acurácia: ", accuracy_score(y_test,y_pred))
     print("Precisão: ", precision_score(y_test,y_pred))
