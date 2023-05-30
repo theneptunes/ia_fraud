@@ -66,12 +66,12 @@ def transform():
         else:
             values.append(True)
     df['Is Fraud?'] = values
-    print("Check for Nan")
-    for col in df.columns:
-        if df[col].isnull().values.any():
-            print(col)
-    print("Check for Nan done!")
-    df.info()
+    #print("Check for Nan")
+    #for col in df.columns:
+    #    if df[col].isnull().values.any():
+    #        print(col)
+    #print("Check for Nan done!")
+    #df.info()
     return df
 
 def train(df):
@@ -81,14 +81,12 @@ def train(df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42, stratify=y)#sk metrics
 
-    print('RF....')
+    #print('RF....')
     model = RandomForestClassifier()
     model.fit(X_train, y_train)
 
     y_pred=model.predict(X_test)
-    print(len(y_test))
-    print(len(y_pred))
-    print("RF done!")
+    #print("RF done!")
 
     evaluate(y_test, y_pred)
     return model
@@ -97,22 +95,22 @@ def evaluate(y_test, y_pred):
     # Avaliação
     #acurácia: quero que sempre que eu falar que é fraude, eu esteja certa
     #precisão: quero que sempre que for fraude, eu fale que é fraude
-    print('RF')
+    #print('RF')
     print(confusion_matrix(y_test, y_pred))
     print("Acurácia: ", accuracy_score(y_test,y_pred))
     print("Precisão: ", precision_score(y_test,y_pred))
 
 def get_model():
-    return torch.load('models/lr.pt')
+    return torch.load('models/rf.pt')
 
 def save(model):
-    torch.save(model,'models/lr.pt')
+    torch.save(model,'models/rf.pt')
 
-def predict_lr(t :Transaction.Transaction):
+def predict_rf(t :Transaction.Transaction):
     df = transform()
     #model = get_model()
     model = train(df)
-    #save(model)
+    save(model)
     return model.predict(t)
 
 if __name__ == "__main__":
@@ -120,4 +118,4 @@ if __name__ == "__main__":
     model = train(df)
     save(model)
 else:
-    sys.modules[__name__] = predict_lr
+    sys.modules[__name__] = predict_rf

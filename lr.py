@@ -71,12 +71,12 @@ def transform():
         else:
             values.append(True)
     df['Is Fraud?'] = values
-    print("Check for Nan")
-    for col in df.columns:
-        if df[col].isnull().values.any():
-            print(col)
-    print("Check for Nan done!")
-    df.info()
+    #print("Check for Nan")
+    #for col in df.columns:
+    #    if df[col].isnull().values.any():
+    #        print(col)
+    #print("Check for Nan done!")
+    #df.info()
     return df
 
 def train(df):
@@ -84,14 +84,14 @@ def train(df):
 
     X = df.drop(['Is Fraud?'],axis=1)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 4000, stratify=y)#sk metrics
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.4, random_state = 4000, stratify=y)#sk metrics
 
-    print("Logictic regression....")
+    #print("Logictic regression....")
     model_lr = LogisticRegression(solver='lbfgs', max_iter=400)
     model_lr.fit(X_train, y_train)
 
     y_pred = model_lr.predict(X_test)
-    print("Logictic regression done!")
+    #print("Logictic regression done!")
 
     evaluate(y_test, y_pred)
     return model_lr

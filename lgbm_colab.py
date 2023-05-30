@@ -82,16 +82,17 @@ def train(df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42, stratify=y)#sk metrics
 
-    print('LGBM....')
+    #print('LGBM....')
     model = lgb.LGBMClassifier()
     model.fit(X_train, y_train, feature_name='auto', categorical_feature = 'auto', verbose=50)
 
     y_pred=model.predict(X_test)
-    print("LGBM done!")
+    #print("LGBM done!")
 
-    evaluate(y_test, y_pred)
+    #evaluate(y_test, y_pred)
     return model
-
+def test(model):
+    y_pred=model.predict(X_test)
 def evaluate(y_test, y_pred):
     # Avaliação
     #acurácia: quero que sempre que eu falar que é fraude, eu esteja certa
@@ -102,12 +103,12 @@ def evaluate(y_test, y_pred):
     print("Precisão: ", precision_score(y_test,y_pred))
 
 def get_model():
-    return torch.load('models/lgbm.pt')
+    return torch.load('model_lgbm.pt')
 
 def save(model):
-    torch.save(model,'models/lgbm.pt')
+    torch.save(model,'models/lr.pt')
 
-def predict_lgbm(t :Transaction.Transaction):
+def predict_lr(t :Transaction.Transaction):
     df = transform()
     #model = get_model()
     model = train(df)
@@ -115,8 +116,10 @@ def predict_lgbm(t :Transaction.Transaction):
     return model.predict(t)
 
 if __name__ == "__main__":
-    df = transform()
-    model = train(df)
-    save(model)
+    #df = transform()
+    #model = train(df)
+    #save(model)
+    model = get_model()
+
 else:
-    sys.modules[__name__] = predict_lgbm
+    sys.modules[__name__] = predict_lr

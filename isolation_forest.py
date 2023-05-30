@@ -68,11 +68,11 @@ def transform():
             values.append(True)
     df['Is Fraud?'] = values
     print("Check for Nan")
-    for col in df.columns:
-        if df[col].isnull().values.any():
-            print(col)
-    print("Check for Nan done!")
-    df.info()
+    #for col in df.columns:
+    #    if df[col].isnull().values.any():
+    #        print(col)
+    #print("Check for Nan done!")
+    #df.info()
     return df
 
 def train(df):
@@ -82,16 +82,16 @@ def train(df):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42, stratify=y)#sk metrics
 
-    print("Isolation forest....")
+    #print("Isolation forest....")
     model = IsolationForest(contamination='auto', random_state=42)
     model.fit(X_train, y_train)
 
     y_pred=model.predict(X_test)
     y_pred = [False if i==-1 else True for i in y_pred]
 
-    print("Isolation forest done!")
+    #print("Isolation forest done!")
 
-    evaluate(y_test, y_pred)
+    #evaluate(y_test, y_pred)
     return model
 
 def evaluate(y_test, y_pred):

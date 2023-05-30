@@ -36,7 +36,7 @@ def get_normalizer_dict(df_column):
 
 def transform():
     df = pd.read_csv("data/filtered.csv")
-    df.info()
+    #df.info()
 
     converted_time = transform_time(df['Time'])
     df['Time'] = df['Time'].replace(converted_time)
@@ -63,11 +63,11 @@ def transform():
     df['Merchant Name'] = df['Merchant Name'].fillna(df['Merchant Name'].mode()[0])
     df['Is Fraud?'] = df['Is Fraud?'].fillna(df['Is Fraud?'].mode()[0])
 
-    print("Check for Nan")
-    for col in df.columns:
-        if df[col].isnull().values.any():
-            print(col)
-    print("Check for Nan done!")
+    #print("Check for Nan")
+    #for col in df.columns:
+    #    if df[col].isnull().values.any():
+    #        print(col)
+    #print("Check for Nan done!")
     return df
 
 def train(df):
