@@ -1,61 +1,42 @@
-import lr
-import lgbm
-import isolation_forest
-import random_forest
-import gnb
+import rf
 import Transaction
-## Year,Month,Day,Time,Amount,Use Chip,Merchant Name,Merchant City,Is Fraud?
+## Amount,Use Chip,MCC,Has Chip,Merchant Latitude,Merchant Longitude,Month,Day of Week,Day,Hour,Distance to Merchant,Latitude,Longitude,Age,Is Fraud
      
-# Use chip
-# Swipe Transaction 0
-# Online Transaction 1
+# Use Chip
+# 0 - Chip Transaction
+# 1 - Online Transaction
+# 2 - Swipe Transaction
 
-# Merchant City
-# La Verne 0
-# Monterey Park 1
-# Mira Loma 2
+# Has Chip
+# 0 - No
+# 1 - Yes
+
+# Day of Week
+# 0 - Segunda
+# ...
+# 6 - Domingo
 
 t = Transaction.Transaction(
-    2020,
-    12,
-    4,
-    1684701282.0, #21/05/2023
-    2000.0,
-    0,
-    -727612092139916043,
-    1
+    400,
+    0.0,
+    5712.0,
+    1.0,
+    37.42488662030914,
+    -91.83121755030102,
+    4.0,
+    4.0,
+    5.0,
+    19.0,
+    350.5380032727895, # 10
+    35.58,
+    -88.5,
+    26.0
 )
-predicted = lr([t.values])
+
+predicted = rf([t.values])
 #print(predicted)
 #print(gnb([t.values]))
 if predicted[0] == 0:
     print("OK")
 else:
     print("FRAUDE")
-
-print("LGBM")
-predicted = lgbm([t.values])
-#print(predicted)
-#print(gnb([t.values]))
-if predicted[0] == 0:
-    print("OK")
-else:
-    print("FRAUDE")
-
-print("RF")
-predicted = random_forest([t.values])
-#print(predicted)
-#print(gnb([t.values]))
-if predicted[0] == 0:
-    print("OK")
-else:
-    print("FRAUDE")
-
-#print("IF")
-#predicted = isolation_forest([t.values])
-#print(predicted)
-#print(gnb([t.values]))
-#if predicted[0] == 0:
-#    print("OK")
-#else:
-#    print("FRAUDE")
