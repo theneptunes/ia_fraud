@@ -32,9 +32,9 @@ def train(df):
 def evaluate(y_test, y_pred):
     print('Random Forest Classifier')
     print(confusion_matrix(y_test, y_pred))
-    print("Acurácia: ", accuracy_score(y_test,y_pred))
-    print("Precisão: ", precision_score(y_test,y_pred))
-    print("F1: ", f1_score(y_test,y_pred))
+    print("Acurácia: {:.3f}".format(accuracy_score(y_test,y_pred)))
+    print("Precisão: {:.3f}".format(precision_score(y_test,y_pred)))
+    print("F1: {:.3f}".format(f1_score(y_test,y_pred)))
 
 def get_model():
     return torch.load('models/rf.pt')
