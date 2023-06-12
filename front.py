@@ -1064,6 +1064,8 @@ def main():
     botao = st.button('Search')
 
     # Search button
+    quantity = quantity/4.97
+    print(quantity)
     if botao:
         result_text = search_data(quantity, use_chip, mcc, chip, merchant_latitude, merchant_longitude, month, day_name, day, time, buyer_latitude, buyer_longitude, idade)
         col1, col2, col3 = st.columns(3)
