@@ -17,7 +17,7 @@ import Transaction
 # 6 - Domingo
 
 t = Transaction.Transaction(
-    400,
+    1200,
     0.0,
     5712.0,
     1.0,

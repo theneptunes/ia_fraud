@@ -72,7 +72,7 @@ def main():
     st.dataframe(filtered_df)
 
     # Gráfico de dia da semana com maior gasto de dinheiro
-    df['Day of Week'] = df['Day of Week'].map({0: 'Seg', 1: 'Ter', 2: 'Qua', 3: 'Qui', 4: 'Sex', 5: 'Sáb', 6: 'Dom'})
+    df['Day of Week'] = filtered_df['Day of Week'].map({0: 'Seg', 1: 'Ter', 2: 'Qua', 3: 'Qui', 4: 'Sex', 5: 'Sáb', 6: 'Dom'})
     day_of_week_spending = df.groupby('Day of Week')['Amount'].sum()
     day_of_week_spending = day_of_week_spending.reindex(['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'])
     st.subheader("Dia da Semana com Maior Gasto de Dinheiro")
